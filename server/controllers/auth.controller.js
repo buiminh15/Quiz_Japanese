@@ -56,6 +56,47 @@ exports.register = async (req, res, next) => {
                 return
             }
         }
-         res.status(201).json({ success: true, message: 'Acount registered!' }); // Return success 
+        res.status(201).json({ success: true, message: 'Acount registered!' }); // Return success 
+    });
+}
+
+
+exports.login = async (req, res, next) => {
+    // Check if username was provided
+    if (!req.body.email) {
+        res.json({ success: false, message: 'No email was provided' }); // Return error
+        return
+    }
+    // Check if password was provided
+    if (!req.body.password) {
+        res.json({ success: false, message: 'No password was provided.' }); // Return error
+        return
+    }
+
+    // Check if username exists in database
+    await User.findOne({ email: req.body.email }, (err, user) => {
+        // Check if error was found
+        if (err) {
+            return res.json({ success: false, message: err }); // Return error  
+        }
+        // Check if username was found
+        if (!user) {
+            return res.status(200).json({ success: false, message: 'Username not found.' }); // Return error   
+        }
+
+        const validPassword = user.comparePassword(req.body.password); // Compare password provided to password in database
+        // Check if password is a match
+        if (!validPassword) {
+            return res.status(200).json({ success: false, message: 'Password invalid' }); // Return error
+        }
+        const token = jwt.sign({ userId: user._id }, config.SECRET_KEY, { expiresIn: config.LIFE_TIME_TOKEN }); // Create a token for client
+        res.json({
+            success: true,
+            message: 'Success!',
+            token: token,
+            user: {
+                username: user.name
+            }
+        }); // Return success and token to frontend
     });
 }
