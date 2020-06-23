@@ -1,4 +1,4 @@
-const User = require('../models/User'); // Import User Model Schema
+const User = require('../models/User.model'); // Import User Model Schema
 const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
 const config = require('../config/config')
 
