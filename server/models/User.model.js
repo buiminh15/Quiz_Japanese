@@ -38,18 +38,17 @@ const Roles = ['user', 'admin'];
          created_on: {
              type: Date,
              default: Date.now
-         },
+         }
      },
-     {
+    {
         timestamps: true,
     }
  );
-
-/**
- * @typedef User
- */
-
-userSchema.methods.generateHash = function(password) {
+ 
+ /**
+  * hash password
+  */
+ userSchema.methods.generateHash = function(password) {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
   };
   
@@ -58,5 +57,6 @@ userSchema.methods.generateHash = function(password) {
   };
   
   let User = mongoose.model('User', userSchema)
+
 
  module.exports = User
