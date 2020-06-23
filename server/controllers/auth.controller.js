@@ -95,7 +95,9 @@ exports.login = async (req, res, next) => {
             message: 'Success!',
             token: token,
             user: {
-                username: user.name
+                username: user.username,
+                email: user.email,
+                role: user.role,
             }
         }); // Return success and token to frontend
     });
