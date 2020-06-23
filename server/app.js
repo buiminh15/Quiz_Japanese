@@ -4,8 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var mongoose = require('mongoose'); // Node Tool for MongoDB
+var config = require('./config/config'); // Mongoose Config
+
+var authRouter = require('./routes/auth.route');
 
 var app = express();
 
@@ -19,8 +21,22 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// connect MongoDB
+mongoose.Promise = global.Promise;
+mongoose.connect(config.URI_MONGO, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+  useCreateIndex: true,
+}, (err) => {
+  // Check if database was able to connect
+  if (err) {
+    console.log('Could NOT connect to database: ', err); // Return error message
+  } else {
+    console.log('Connected to MONGO' ); // Return success message
+  }
+});
+
+app.use('/api/v1/users', authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

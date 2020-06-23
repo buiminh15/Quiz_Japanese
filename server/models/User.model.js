@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
+<<<<<<< HEAD
 const bcrypt = require("bcryptjs");
 
 
+=======
+const bcrypt = require('bcryptjs')
+>>>>>>> origin/server-minhbb
 
 const Roles = ['user', 'admin'];
 
@@ -65,4 +69,15 @@ const Roles = ['user', 'admin'];
 /**
  * @typedef User
  */
- module.exports = mongoose.model('User', userSchema)
+
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  };
+  
+  userSchema.methods.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password); // Return comparison of login password to password in database (true or false)
+  };
+  
+  let User = mongoose.model('User', userSchema)
+
+ module.exports = User
