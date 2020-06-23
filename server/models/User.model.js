@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const httpStatus = require("http-status");
 const bcrypt = require("bcryptjs");
-const moment = require("moment-timezone");
+
 
 
 const Roles = ['user', 'admin'];
@@ -42,7 +41,10 @@ const Roles = ['user', 'admin'];
              type: Date,
              default: Date.now
          }
-     }
+     },
+    {
+        timestamps: true,
+    }
  );
  
  /**
