@@ -1,4 +1,7 @@
 const mongoose = require("mongoose");
+const httpStatus = require("http-status");
+const bcrypt = require("bcryptjs");
+const moment = require("moment-timezone");
 
 
 const Roles = ['user', 'admin'];
@@ -41,6 +44,21 @@ const Roles = ['user', 'admin'];
          }
      }
  );
+ 
+ /**
+  * hash password
+  */
+ userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+  };
+  
+  userSchema.methods.comparePassword = function (password) {
+    return bcrypt.compareSync(password, this.password); // Return comparison of login password to password in database (true or false)
+  };
+  
+  let User = mongoose.model('User', userSchema)
+
+
 
 /**
  * @typedef User
