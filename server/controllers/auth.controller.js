@@ -23,6 +23,7 @@ exports.register = async (req, res, next) => {
     let user = new User({
         username: req.body.username,
         email: req.body.email.toLowerCase(),
+        role: req.body.role
     });
     user.password = user.generateHash(req.body.password)
     // Save user to database

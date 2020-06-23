@@ -38,8 +38,11 @@ const Roles = ['user', 'admin'];
          created_on: {
              type: Date,
              default: Date.now
-         }
-     }
+         },
+     },
+     {
+        timestamps: true,
+    }
  );
 
 /**
