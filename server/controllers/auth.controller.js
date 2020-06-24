@@ -35,6 +35,7 @@ exports.register = async (req, res, next) => {
 
 // Login
 exports.login = async (req, res, next) => {
+    
     // Check if username was provided
     if (!req.body.email) {
         res.json({ success: false, message: 'No email was provided' }); // Return error
@@ -48,6 +49,10 @@ exports.login = async (req, res, next) => {
 
     // Check if username exists in database
     await User.findOne({ email: req.body.email }, (err, user) => {
+
+        if (!user.isVerify) {
+            return res.json({ success: false, message: 'chua verify' });
+        }
         // Check if error was found
         if (err) {
             return res.json({ success: false, message: err }); // Return error  

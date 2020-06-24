@@ -38,6 +38,10 @@ const Roles = ['user', 'admin'];
          created_on: {
              type: Date,
              default: Date.now
+         },
+         isVerify: {
+             type: Boolean,
+             default: false
          }
      },
     {
