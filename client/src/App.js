@@ -10,23 +10,12 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-
           <HeaderTop />
-
-
+          <Container>
           <Switch>
             <Route exact path="/login" component={Login}></Route>
           </Switch>
-          <Switch>
-            <Route exact path="/login" component={Login}></Route>
-          </Switch>
-          <Switch>
-            <Route exact path="/login" component={Login}></Route>
-          </Switch>
-          <Switch>
-            <Route exact path="/login" component={Login}></Route>
-          </Switch>
-
+          </Container>
         <Footer />
       </BrowserRouter>
     </div>

@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 
-const styles = {
-  position: "fixed",
-  width: "100%",
-  top: "0"
-};
-
 class HeaderTop extends Component {
   render() {
     return (
