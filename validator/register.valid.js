@@ -21,28 +21,28 @@ module.exports = function validateRegisterInput(data) {
   }
 
   if (!validator.isLength(data.username, { min: 2, max: 40 })) {
-    errors.username = "t?n ??ng k? ph?i d?i t? 2 k? t? ??n 40 k? t?";
+    errors.username = "Username is from 2 to 40 characters";
   }
   if (validator.isEmpty(data.username)) {
-    errors.username = "T?n ??ng k? kh?ng ???c b? tr?ng";
+    errors.username = "Username is not empty";
   }
 
   if (!validator.isEmail(data.email)) {
     // console.log(data.email);
-    errors.email = "Email kh?ng h?p l?";
+    errors.email = "Invalid email";
   }
   if (validator.isEmpty(data.email)) {
     // console.log(data.email);
-    errors.email = "Email ??ng k? kh?ng ???c b? tr?ng";
+    errors.email = "Email is not empty";
   }
   if (!validator.isLength(data.password, { min: 6, max: 128 })) {
-    errors.password = "Password d?i t? 6 ??n 128 k? t?";
+    errors.password = "Password is from 2 to 40 characters";
   }
   if (validator.isEmpty(data.password)) {
-    errors.password = "Password ??ng k? kh?ng ???c b? tr?ng";
+    errors.password = "Password is not empty";
   }
   return {
     errors,
-    isValid: isEmpty(errors)
-  }
+    isValid: isEmpty(errors),
+  };
 };
