@@ -4,6 +4,7 @@ const config = require('../config/config')
 
 const validateRegisterInput =  require('../validator/register.valid')
 
+// Register
 exports.register = async (req, res, next) => {
     const { errors, isValid } = validateRegisterInput(req.body);
     if (!isValid) {
@@ -32,7 +33,7 @@ exports.register = async (req, res, next) => {
     });
 }
 
-
+// Login
 exports.login = async (req, res, next) => {
     // Check if username was provided
     if (!req.body.email) {
