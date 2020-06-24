@@ -2,7 +2,17 @@ import React, { Component } from 'react'
 
 
 class Login extends Component {
+    constructor (props) {
+        super(props)
+        this.state = {}
+    }
+
     render() {
-       <a name="" id="" class="btn btn-primary" href="#" role="button">abcsa test</a>
+        return (
+            <div>Login page</div>
+            // <a name="" id="" className="btn btn-primary" role="button">abcsa test</a>
+        )
     }
 }
+
+export default Login
