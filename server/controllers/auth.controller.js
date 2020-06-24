@@ -2,7 +2,7 @@ const User = require('../models/User.model'); // Import User Model Schema
 const jwt = require('jsonwebtoken'); // Compact, URL-safe means of representing claims to be transferred between two parties.
 const config = require('../config/config')
 
-const validateRegisterInput =  require('../validator/register.valid')
+const validateRegisterInput = require('../validator/register.valid')
 
 // Register
 exports.register = async (req, res, next) => {
@@ -35,7 +35,7 @@ exports.register = async (req, res, next) => {
 
 // Login
 exports.login = async (req, res, next) => {
-    
+
     // Check if username was provided
     if (!req.body.email) {
         res.json({ success: false, message: 'No email was provided' }); // Return error
@@ -78,5 +78,32 @@ exports.login = async (req, res, next) => {
                 role: user.role,
             }
         }); // Return success and token to frontend
+    });
+}
+
+// Confirm User
+exports.confirmUser = async (req, res, next) => {
+    const email = req.body.email
+    await User.findOne({ email: email }, function (err, user) {
+        if (err) {
+            return res.status(400).json({ success: false, message: err });
+        }
+
+        // Verify and save the user
+        user.isVerify = true;
+        user.save(function (err) {
+            if (err) { return res.status(500).json({ success: false, message: err.message }); }
+            res.status(200).json("The account has been verified. Please log in.");
+        });
+    });
+}
+
+// Get All Unverified Users
+exports.getUnverifiedUsers = async (req, res, next) => {
+    await User.find({ isVerify: false }, function (err, users) {
+        if (err) {
+            return res.status(400).json({ success: false, message: err });
+        }
+        res.status(200).json({ users: users });
     });
 }
