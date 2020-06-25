@@ -45,7 +45,7 @@ const router = require('express').Router();
   router.post('/confirm',  authController.confirmUser);
 
   /**
-   * @api {post} api/v1/users/uncheck Get All Unverified Users
+   * @api {get} api/v1/users/uncheck Get All Unverified Users
    * @apiDescription Get All Unverified Users
    * @apiVersion 1.0.0
    * @apiName getUnverifiedUsers
@@ -58,4 +58,17 @@ const router = require('express').Router();
    */
   router.get('/uncheck',  authController.getUnverifiedUsers);
 
+   /**
+   * @api {post} api/v1/users/reject Delete user
+   * @apiDescription Delete user
+   * @apiVersion 1.0.0
+   * @apiName rejectUser
+   * @apiGroup Authen-Autho
+   *
+   *
+   * @apiSuccess {Object} Message Login Success - Token
+   *
+   * @apiError (Bad Request 400)  Bad Request  
+   */
+  router.post('/reject',  authController.rejectUser);
   module.exports = router;
