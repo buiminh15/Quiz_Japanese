@@ -42,20 +42,23 @@ exports.login = async (req, res, next) => {
   }
   // Check if username exists in database
   await User.findOne({ email: req.body.email }, (err, user) => {
-    if (!user.isVerify) {
-      errors.verify = "User is not verify";
-      return res.status(400).json(errors);
-    }
     // Check if error was found
     if (err) {
       errors = err;
       return res.status(400).json(errors); // Return error
     }
+
     // Check if username was found
     if (!user) {
       errors.email = "Username not found.";
       return res.status(400).json(errors); // Return error
     }
+
+    if (!user && !user.isVerify) {
+      errors.verify = "User is not verify";
+      return res.status(400).json(errors);
+    }
+
     const validPassword = user.comparePassword(req.body.password); // Compare password provided to password in database
     // Check if password is a match
     if (!validPassword) {
