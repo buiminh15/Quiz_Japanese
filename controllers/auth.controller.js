@@ -92,17 +92,33 @@ exports.getUnverifiedUsers = async (req, res, next) => {
 exports.confirmUser = async (req, res, next) => {
   const email = req.body.email
   await User.findOne({ email: email }, function (err, user) {
-      if (err) {
-          return res.status(400).json({ success: false, message: err });
-      }
+    if (err) {
+      return res.status(400).json({ success: false, message: err });
+    }
 
-      // Verify and save the user
-      if (!user.isVerify) {
-        user.isVerify = true;
-      } 
-      user.save(function (err) {
-          if (err) { return res.status(500).json({ success: false, message: err.message }); }
-          res.status(200).json("The account has been verified. Please log in.");
-      });
+    // Verify and save the user
+    if (!user.isVerify) {
+      user.isVerify = true;
+    }
+    user.save(function (err) {
+      if (err) { return res.status(500).json({ success: false, message: err.message }); }
+      res.status(200).json("The account has been verified. Please log in.");
+    });
   });
+}
+
+// Reject User
+exports.rejectUser = async (req, res, next) => {
+  const email = req.body.email
+  const isVerify = req.body.isVerify
+
+  if (isVerify) {
+    return res.status(200).json("Cannot delete");
+  }
+  await User.deleteOne({ email: email }, (err, user) => {
+    if (err) {
+      return res.status(400).json({ success: false, message: err });
+    }
+    res.status(200).json("Deleted");
+  })
 }
