@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Card, Button } from "react-bootstrap";
+import React, { Component } from 'react';
+import TextInputField from '../../commonModules/TextInputField';
 
 class Login extends Component {
   constructor(props) {
@@ -9,20 +9,22 @@ class Login extends Component {
 
   render() {
     return (
-      <Card style={{ width: "18rem" }}>
-        <Card.Img
-          variant="top"
-          src="https://www.gstatic.com/webp/gallery/2.jpg"
-        />
-        <Card.Body>
-          <Card.Title>Card Title</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
-        </Card.Body>
-      </Card>
+      <div className="container">
+        <div className="row">
+          <div className="col-8 m-auto">
+            <h1 className="display-4 text-center text-warning big-title">Japanese Quiz Login</h1>
+            <p className="lead text-center text-warning small-title">Japanese Quiz　ようこそ</p>
+            <form className="mt-4">
+              <TextInputField name="email" type="email" placeholder="Email Address" />
+              <TextInputField name="password" type="password" placeholder="Password" />
+              <div className="form-group">
+                <input className="btn btn-primary d-block col-7 mx-auto mb-4" type="button" defaultValue="Login" style={{ height: '2.8em' }} />
+                <input className="btn btn-primary d-block col-7 mx-auto mb-4" type="button" defaultValue="Sign in" style={{ height: '2.8em' }} />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     );
   }
 }

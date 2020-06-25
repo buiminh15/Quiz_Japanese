@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+#landingPage {
+  position: relative;
+  background: url('./commonImgs/woman-1822646.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}

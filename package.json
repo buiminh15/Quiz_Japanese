@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "classnames": "^2.2.6",
     "concurrently": "^5.2.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
@@ -26,6 +27,7 @@
     "morgan": "~1.9.1",
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
+    "prop-types": "^15.7.2",
     "validator": "^13.1.1"
   }
 }
