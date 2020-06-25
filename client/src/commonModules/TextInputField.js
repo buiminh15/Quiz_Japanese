@@ -22,16 +22,16 @@ const TextInputField = ({ name, placeholder, value, error, info, type, onChange,
     </div>
   );
 };
-// TextInputField.PropTypes = {
-//   name: PropTypes.string.isRequired,
-//   type: PropTypes.string.isRequired,
-//   onChange: PropTypes.func,
-//   value: PropTypes.string,
-//   info: PropTypes.string,
-//   error: PropTypes.string,
-//   disabled: PropTypes.string,
-//   placeholder: PropTypes.string,
-// };
+TextInputField.propTypes = {
+  name: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  info: PropTypes.string,
+  error: PropTypes.string,
+  disabled: PropTypes.string,
+  placeholder: PropTypes.string,
+};
 TextInputField.defaultProps = {
   type: 'text',
 };
