@@ -17,7 +17,7 @@ exports.createQuestion = (req, res) => {
         req.body.quiz[0].answer = req.body.quiz[0].choices[0]
         var query = { creator: req.body.creator }
         var update = { $push: {quiz :req.body.quiz[0] }}
-        var options = { upsert: true, new: true, setDefaultsOnInsert: true };
+        var options = { upsert: true, new: true, setDefaultsOnInsert: true, runValidators: true  };
 
         Question.findOneAndUpdate(query, update, options, (err, doc) => {
             if (err) {
