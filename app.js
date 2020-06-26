@@ -8,7 +8,7 @@ var mongoose = require('mongoose'); // Node Tool for MongoDB
 var config = require('./config/config'); // Mongoose Config
 
 var authRouter = require('./routes/auth.route');
-
+var questionRouter = require('./routes/question.route');
 var app = express();
 
 // view engine setup
@@ -38,7 +38,7 @@ mongoose.connect(config.URI_MONGO, {
 });
 
 app.use('/api/v1/users', authRouter);
-
+app.use('/api/v1/q', questionRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
