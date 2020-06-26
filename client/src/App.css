@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
@@ -42,5 +45,6 @@
   background: url('./commonImgs/woman-1822646.jpg') no-repeat;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  background-attachment: fixed;
+  flex-grow: 1;
 }
