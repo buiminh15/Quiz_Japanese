@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require('bcryptjs')
 
 /**
- * User Schema
+ * Question Schema
  * @private
  */
 const levels = ["N1","N2","N3","N4","N5"]
@@ -13,13 +13,13 @@ const categories = ["1","2","3"]
             type: String,
             enum: levels
         },
-        q: {
+        question: {
             type: String
         },
         choices: [{
             type: String
         }],
-        a: {
+        answer: {
             type: String
         },
         category: {
@@ -36,5 +36,4 @@ const categories = ["1","2","3"]
      }
  );
  
-  
  module.exports = mongoose.model('Question', questionSchema)
