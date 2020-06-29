@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import TextInputField from '../../commonModules/TextInputField';
 import ButtonField from '../../commonModules/ButtonField';
-import { LoginUser } from '../../actions/login.actions';
+import { LoginUser } from '../../actions/auth.actions';
 
 class Login extends Component {
   constructor(props) {

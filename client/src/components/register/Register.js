@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { registerUser } from '../../actions/auth.actions';
+import { connect } from 'react-redux';
 import TextInputField from '../../commonModules/TextInputField';
 import RadioGroupInputField from '../../commonModules/RadioGroupInputField';
 import ButtonField from '../../commonModules/ButtonField';
@@ -33,7 +35,9 @@ class Register extends Component {
       role: this.state.role,
     };
     even.preventDefault();
-    console.log(newUser);
+    // console.log(newUser);
+    console.log('this.props--', this.props);
+    this.props.registerUser(newUser);
   }
   render() {
     const { errors } = this.state;
@@ -81,5 +85,8 @@ class Register extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
 
-export default Register;
+export default connect(mapStateToProps, { registerUser })(withRouter(Register));
