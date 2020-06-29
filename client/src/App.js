@@ -3,7 +3,6 @@ import './App.css';
 import store from './store';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import LandingPage from './components/layout/Landing.layout';
 import HeaderTop from './components/layout/Navbar.layout';
 import Footer from './components/layout/Footer.layout';
 import AdminPage from './components/admin/admin';
@@ -16,6 +15,7 @@ function App() {
     <Provider store={store}>
       <div className="App">
         <BrowserRouter>
+          {/* ----------------------------------------------- */}
           <HeaderTop />
           {/* ----------------------------------------------- */}
           <div id="landingPage" className="landingPage">
@@ -37,6 +37,7 @@ function App() {
           </div>
           {/* ----------------------------------------------- */}
           <Footer />
+          {/* ----------------------------------------------- */}
         </BrowserRouter>
       </div>
     </Provider>
