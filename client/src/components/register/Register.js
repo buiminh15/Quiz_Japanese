@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import TextInputField from '../../commonModules/TextInputField';
 import RadioGroupInputField from '../../commonModules/RadioGroupInputField';
+import ButtonField from '../../commonModules/ButtonField';
 
 class Register extends Component {
   constructor(props) {
@@ -64,9 +65,15 @@ class Register extends Component {
               <RadioGroupInputField name="role" id="role1" defaultValue="user" onChange={this.onChange} defaultChecked label="User" />
               <RadioGroupInputField name="role" id="role2" defaultValue="admin" onChange={this.onChange} label="Admin" />
 
-              <div className="form-group">
-                <input className="btn btn-success btn-block mt-4" type="submit" style={{ height: '2.8em' }} />
-              </div>
+              <ButtonField
+                type="button"
+                btnColor="btn-success"
+                btnCol="col-12"
+                btnOther="d-block mx-auto mt-4"
+                defaultValue="Sign in"
+                onClick={this.onSubmit}
+                btnStyle={{ height: '2.8em' }}
+              />
             </form>
           </div>
         </div>

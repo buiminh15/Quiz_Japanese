@@ -9,6 +9,7 @@ import Footer from './components/layout/Footer.layout';
 import AdminPage from './components/admin/admin';
 import UserPage from './components/user/user';
 import Register from './components/register/Register';
+import Login from './components/login/Login';
 
 function App() {
   return (
@@ -16,12 +17,25 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <HeaderTop />
-          <Switch>
-            <Route exact path="/" component={LandingPage}></Route>
-            <Route exact path="/register" component={Register}></Route>
-            <Route exact path="/admin" component={AdminPage}></Route>
-            <Route exact path="/user" component={UserPage}></Route>
-          </Switch>
+          {/* ----------------------------------------------- */}
+          <div id="landingPage" className="landingPage">
+            {/* Landing */}
+            <div className="dark-overlay landing-inner text-light">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-12 text-center">
+                    <Switch>
+                      <Route exact path="/" component={Login}></Route>
+                      <Route exact path="/register" component={Register}></Route>
+                      <Route exact path="/admin" component={AdminPage}></Route>
+                      <Route exact path="/user" component={UserPage}></Route>
+                    </Switch>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* ----------------------------------------------- */}
           <Footer />
         </BrowserRouter>
       </div>

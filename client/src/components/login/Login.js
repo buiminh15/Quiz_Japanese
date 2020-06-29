@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import TextInputField from '../../commonModules/TextInputField';
+import ButtonField from '../../commonModules/ButtonField';
 import { LoginUser } from '../../actions/login.actions';
 
 class Login extends Component {
@@ -27,6 +28,7 @@ class Login extends Component {
   };
 
   onLoginClick = (e) => {
+    // console.log('sfewfew', e);
     this.props
       .login(this.state.email, this.state.password)
       .catch((err) => console.log(err))
@@ -56,16 +58,25 @@ class Login extends Component {
             <form className="mt-4">
               <TextInputField name="email" type="email" placeholder="Email Address" onChange={this.handleChange('email')} value={this.state.email} />
               <TextInputField name="password" type="password" placeholder="Password" onChange={this.handleChange('password')} value={this.state.password} />
-              <div className="form-group">
-                <input
-                  className="btn btn-primary d-block col-7 mx-auto mb-4"
-                  type="button"
-                  defaultValue="Login"
-                  style={{ height: '2.8em' }}
-                  onClick={this.onLoginClick}
-                />
-                <input className="btn btn-primary d-block col-7 mx-auto mb-4" type="button" defaultValue="Sign in" style={{ height: '2.8em' }} />
-              </div>
+
+              <ButtonField
+                type="button"
+                btnColor="btn-primary"
+                btnCol="col-7"
+                btnOther="d-block mx-auto mb-4"
+                defaultValue="Login"
+                onClick={this.onLoginClick}
+                btnStyle={{ height: '2.8em' }}
+              />
+              <ButtonField
+                type="button"
+                btnColor="btn-primary"
+                btnCol="col-7"
+                btnOther="d-block mx-auto mb-4"
+                defaultValue="Sign in"
+                onClick={this.onLoginClick}
+                btnStyle={{ height: '2.8em' }}
+              />
             </form>
           </div>
         </div>
@@ -74,4 +85,4 @@ class Login extends Component {
   }
 }
 
-export default connect(null, LoginUser)(Login);
+export default Login;
