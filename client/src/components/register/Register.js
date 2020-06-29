@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import TextInputField from '../../commonModules/TextInputField';
+import RadioGroupInputField from '../../commonModules/RadioGroupInputField';
 
 class Register extends Component {
   constructor(props) {
@@ -60,19 +61,8 @@ class Register extends Component {
                 value={this.state.password2}
                 error={errors.password2}
               />
-
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name="role" id="role2" defaultValue="user" onChange={this.onChange} defaultChecked />
-                <label className="form-check-label" htmlFor="role2">
-                  User
-                </label>
-              </div>
-              <div className="form-check form-check-inline">
-                <input className="form-check-input" type="radio" name="role" id="role1" defaultValue="admin" onChange={this.onChange} />
-                <label className="form-check-label" htmlFor="role1">
-                  Admin
-                </label>
-              </div>
+              <RadioGroupInputField name="role" id="role1" defaultValue="user" onChange={this.onChange} defaultChecked label="User" />
+              <RadioGroupInputField name="role" id="role2" defaultValue="admin" onChange={this.onChange} label="Admin" />
 
               <div className="form-group">
                 <input className="btn btn-success btn-block mt-4" type="submit" style={{ height: '2.8em' }} />
