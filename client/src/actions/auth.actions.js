@@ -18,3 +18,38 @@ export const registerUser = (userData, history) => (dispatch) => {
       });
     });
 };
+
+const setAuthToken = (token) => {
+  if (token) {
+    axios.defaults.headers.common['Authorization'] = token;
+  } else {
+    delete axios.defaults.headers.common['Authorization'];
+  }
+};
+
+//LOGIN
+export const loginUser = (userData) => (dispatch) => {
+  // console.log(userData);
+  axios
+    .post('/api/v1/users/login', userData)
+    .then((res) => {
+      // console.log(res.data);
+      const { token } = res.data;
+      localStorage.setItem('jwtToken', token);
+      setAuthToken(token);
+      const decode = jwt_decode(token);
+      // console.log('token--', token);
+      // console.log('decode--', decode);
+      dispatch({
+        type: AUTH_ACTION.SET_CURRENT_USER,
+        userData: res.data.user,
+        jwt_decode: decode,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ERROR_ACTION.GET_ERRORS,
+        ErrPayload: err.response.data,
+      });
+    });
+};

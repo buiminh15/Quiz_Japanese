@@ -6,6 +6,7 @@ import isEmpty from '../validations/isEmpty';
 const initialState = {
   authenticated: false,
   user: {},
+  decode: {},
 };
 
 // export const LoginReducer = (state = initState, action) => {
@@ -27,8 +28,9 @@ export default (state = initialState, action) => {
     case AUTH_ACTION.SET_CURRENT_USER:
       return {
         ...state,
-        isAuthenticated: !isEmpty(action.payload),
-        user: action.payload,
+        isAuthenticated: !isEmpty(action.jwt_decode),
+        user: action.userData,
+        decode: action.jwt_decode,
       };
     default:
       return state;

@@ -19,6 +19,7 @@ class Register extends Component {
     };
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.onLoginClick = this.onLoginClick.bind(this);
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
@@ -62,6 +63,11 @@ class Register extends Component {
       this.props.registerUser(newUser, this.props.history);
     }
   }
+
+  onLoginClick(even) {
+    even.preventDefault();
+    this.props.history.push('/');
+  }
   render() {
     const { errors } = this.state;
 
@@ -100,6 +106,15 @@ class Register extends Component {
                 btnOther="d-block mx-auto mt-4"
                 defaultValue="Sign in"
                 onClick={this.onSubmit}
+                btnStyle={{ height: '2.8em' }}
+              />
+              <ButtonField
+                type="button"
+                btnColor="btn-success"
+                btnCol="col-12"
+                btnOther="d-block mx-auto mt-4"
+                defaultValue="Login"
+                onClick={this.onLoginClick}
                 btnStyle={{ height: '2.8em' }}
               />
             </form>
