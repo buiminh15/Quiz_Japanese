@@ -2,6 +2,13 @@ import React from 'react';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 
+const validFeedback = {
+  display: 'block',
+  color: 'red',
+  fontSize: '100%',
+  marginTop: '0.1rem',
+};
+
 const TextInputField = ({ name, placeholder, value, error, info, type, onChange, disabled }) => {
   return (
     <div className="form-group mb-4">
@@ -17,8 +24,11 @@ const TextInputField = ({ name, placeholder, value, error, info, type, onChange,
         onChange={onChange}
         disabled={disabled}
       />
-      {info && <small className="form-text text-danger mt-2">{info}</small>}
-      {error && <div className="valid-feedback">{error}</div>}
+      {error && (
+        <div className="valid-feedback" style={validFeedback}>
+          {error}
+        </div>
+      )}
     </div>
   );
 };

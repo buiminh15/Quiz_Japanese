@@ -20,6 +20,11 @@ class Register extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
   onChange(even) {
     this.setState({
       [even.target.name]: even.target.value,
@@ -27,20 +32,39 @@ class Register extends Component {
   }
 
   onSubmit(even) {
-    const newUser = {
+    const newData = {
       email: this.state.email,
       username: this.state.username,
       password: this.state.password,
       password2: this.state.password2,
       role: this.state.role,
     };
-    even.preventDefault();
-    // console.log(newUser);
-    console.log('this.props--', this.props);
-    this.props.registerUser(newUser);
+    if (!newData.password2) {
+      this.setState({
+        errors: {
+          password2: 'Password Confirm not empty',
+        },
+      });
+    } else if (newData.password !== newData.password2) {
+      this.setState({
+        errors: {
+          password2: 'Password and confirm password must be the same',
+        },
+      });
+    } else {
+      const newUser = {
+        email: newData.email,
+        username: newData.username,
+        password: newData.password,
+        role: newData.role,
+      };
+      even.preventDefault();
+      this.props.registerUser(newUser, this.props.history);
+    }
   }
   render() {
     const { errors } = this.state;
+
     return (
       <div className="container">
         <div className="row">
@@ -87,6 +111,7 @@ class Register extends Component {
 }
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  errors: state.errors,
 });
 
 export default connect(mapStateToProps, { registerUser })(withRouter(Register));
