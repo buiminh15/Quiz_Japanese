@@ -11,25 +11,12 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      // redirect: {
-      //   auto: false,
-      //   path: '',
-      //   search: '',
-      //   state: {},
-      // },
       errors: {},
     };
     this.onChange = this.onChange.bind(this);
     this.onLoginClick = this.onLoginClick.bind(this);
     this.onRegisterClick = this.onRegisterClick.bind(this);
   }
-
-  // handleChange = (name) => (e) => {
-  //   var newState = {};
-  //   var value = e.currentTarget.value;
-  //   newState[name] = value;
-  //   this.setState(newState);
-  // };
 
   componentDidMount() {
     console.log('componentDidMount--', this.props);
@@ -40,10 +27,15 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      if (nextProps.auth.user.role === 'admin') {
-        this.props.history.push('/admin');
-      } else {
-        this.props.history.push('/user');
+      switch (nextProps.auth.user.role) {
+        case 'admin':
+          this.props.history.push('/admin');
+          break;
+        case 'user':
+          this.props.history.push('/user');
+          break;
+        default:
+          break;
       }
     }
     if (nextProps.errors) {
@@ -57,23 +49,6 @@ class Login extends Component {
     });
   }
 
-  // onLoginClick = (e) => {
-  //   // console.log('sfewfew', e);
-  //   this.props
-  //     .login(this.state.email, this.state.password)
-  //     .catch((err) => console.log(err))
-  //     .then((res) => {
-  //       if (res.status === 200 && res.data.success === true) {
-  //         var path = res.data.user.role === 'admin' ? '/admin' : '/user';
-  //         this.setState({
-  //           redirect: {
-  //             auto: true,
-  //             path: path,
-  //           },
-  //         });
-  //       }
-  //     });
-  // };
   onLoginClick(even) {
     const userData = {
       email: this.state.email,
@@ -89,9 +64,6 @@ class Login extends Component {
   }
 
   render() {
-    // if (this.state.redirect.auto === true) {
-    //   return <Redirect to={this.state.redirect.path} search={this.state.redirect.search} state={this.state.redirect.state}></Redirect>;
-    // }
     const { errors } = this.state;
     return (
       <div className="container">
@@ -100,8 +72,6 @@ class Login extends Component {
             <h1 className="display-4 text-center text-warning big-title">Japanese Quiz Login</h1>
             <p className="lead text-center text-warning small-title">Japanese Quiz　ようこそ</p>
             <form className="mt-4">
-              {/* <TextInputField name="email" type="email" placeholder="Email Address" onChange={this.handleChange('email')} value={this.state.email} />
-              <TextInputField name="password" type="password" placeholder="Password" onChange={this.handleChange('password')} value={this.state.password} /> */}
               <TextInputField name="email" type="email" placeholder="Email Address" onChange={this.onChange} value={this.state.email} error={errors.email} />
               <TextInputField
                 name="password"
