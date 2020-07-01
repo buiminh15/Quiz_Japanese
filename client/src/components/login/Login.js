@@ -5,7 +5,6 @@ import TextInputField from '../../commonModules/TextInputField';
 import ButtonField from '../../commonModules/ButtonField';
 import { loginUser } from '../../actions/auth.actions';
 import ErroModal from '../errors_modal/error_modal';
-import { Button, Modal } from 'react-bootstrap';
 
 class Login extends Component {
   constructor(props) {
@@ -22,7 +21,6 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    // console.log('componentDidMount--', this.props);
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/admin');
     }
@@ -66,8 +64,7 @@ class Login extends Component {
 
   onRegisterClick(even) {
     even.preventDefault();
-    // this.props.history.push('/register');
-    this.setState({ showModal: !this.state.showModal });
+    this.props.history.push('/register');
   }
 
   render() {
@@ -107,7 +104,7 @@ class Login extends Component {
                 btnColor="btn-primary"
                 btnCol="col-7"
                 btnOther="d-block mx-auto mb-4"
-                defaultValue="Sign in"
+                defaultValue="Register"
                 onClick={this.onRegisterClick}
                 btnStyle={{ height: '2.8em' }}
               />

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../actions/auth.actions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import ErroModal from '../errors_modal/error_modal';
 import TextInputField from '../../commonModules/TextInputField';
 import RadioGroupInputField from '../../commonModules/RadioGroupInputField';
 import ButtonField from '../../commonModules/ButtonField';
@@ -25,6 +26,9 @@ class Register extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+      if (nextProps.errors.errModel) {
+        this.errModal.showErrModal(nextProps.errors.errModel);
+      }
     }
   }
   onChange(even) {
@@ -75,6 +79,7 @@ class Register extends Component {
     return (
       <div className="container">
         <div className="row">
+          <ErroModal ref={(errModal) => (this.errModal = errModal)} />
           <div className="col-8 m-auto">
             <h1 className="display-4 text-center text-warning big-title">Japanese Quiz Register</h1>
             <p className="lead text-center text-warning small-title">Japanese Quiz　ようこそ</p>
