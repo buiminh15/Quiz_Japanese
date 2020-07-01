@@ -51,10 +51,11 @@ exports.login = async (req, res, next) => {
     // Check if username was found
     if (!user) {
       errors.email = "Username not found.";
+      console.log('123 ',errors)
       return res.status(400).json(errors); // Return error
     }
 
-    if (!user && !user.isVerify) {
+    if (!user.isVerify) {
       errors.verify = "User is not verify";
       return res.status(400).json(errors);
     }
