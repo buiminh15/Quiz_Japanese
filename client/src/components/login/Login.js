@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import TextInputField from '../../commonModules/TextInputField';
 import ButtonField from '../../commonModules/ButtonField';
 import { loginUser } from '../../actions/auth.actions';
+import ErroModal from '../errors_modal/error_modal';
+import { Button, Modal } from 'react-bootstrap';
 
 class Login extends Component {
   constructor(props) {
@@ -16,10 +18,11 @@ class Login extends Component {
     this.onChange = this.onChange.bind(this);
     this.onLoginClick = this.onLoginClick.bind(this);
     this.onRegisterClick = this.onRegisterClick.bind(this);
+    this.errModal = React.createRef();
   }
 
   componentDidMount() {
-    console.log('componentDidMount--', this.props);
+    // console.log('componentDidMount--', this.props);
     if (this.props.auth.isAuthenticated) {
       this.props.history.push('/admin');
     }
@@ -40,6 +43,9 @@ class Login extends Component {
     }
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
+      if (nextProps.errors.verify) {
+        this.errModal.showErrModal(nextProps.errors.verify);
+      }
     }
   }
 
@@ -60,7 +66,8 @@ class Login extends Component {
 
   onRegisterClick(even) {
     even.preventDefault();
-    this.props.history.push('/register');
+    // this.props.history.push('/register');
+    this.setState({ showModal: !this.state.showModal });
   }
 
   render() {
@@ -68,6 +75,9 @@ class Login extends Component {
     return (
       <div className="container">
         <div className="row">
+          {/* ----------------------------------------------- */}
+          <ErroModal ref={(errModal) => (this.errModal = errModal)} />
+          {/* ----------------------------------------------- */}
           <div className="col-8 m-auto">
             <h1 className="display-4 text-center text-warning big-title">Japanese Quiz Login</h1>
             <p className="lead text-center text-warning small-title">Japanese Quiz　ようこそ</p>
@@ -82,6 +92,7 @@ class Login extends Component {
                 error={errors.password}
               />
 
+              {/* {showErr} */}
               <ButtonField
                 type="button"
                 btnColor="btn-primary"
@@ -107,6 +118,12 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object,
+};
 
 const mapStateToProps = (state) => {
   return {

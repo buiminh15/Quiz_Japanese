@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { registerUser } from '../../actions/auth.actions';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import TextInputField from '../../commonModules/TextInputField';
 import RadioGroupInputField from '../../commonModules/RadioGroupInputField';
 import ButtonField from '../../commonModules/ButtonField';
@@ -124,6 +125,11 @@ class Register extends Component {
     );
   }
 }
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object,
+};
 const mapStateToProps = (state) => ({
   auth: state.auth,
   errors: state.errors,
