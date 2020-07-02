@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import Proptypes from 'prop-types';
 
@@ -10,15 +10,15 @@ const validFeedback = {
 };
 
 const SelectListField = ({ name, value, title, error, onChange, option }) => {
-  const selectOptions = option.map((op) => {
-    <option key={op.label} value={op.value}>
-      <op.label />
-    </option>;
-  });
+  const selectOptions = option.map((op) => (
+    <option key={op.value} value={op.value}>
+      {op.label}
+    </option>
+  ));
   return (
     <div className="form-group mb-4">
       <div className="row text-left">
-        <label htmlFor>{title}</label>
+        <label>{title}</label>
       </div>
       <div className="row">
         <select

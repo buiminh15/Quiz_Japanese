@@ -23,7 +23,7 @@ const TextInputField = ({ name, placeholder, value, error, info, type, onChange,
         value={value}
         onChange={onChange}
         disabled={disabled}
-        readonly={readonly}
+        readOnly={readonly}
       />
       {error && (
         <div className="valid-feedback" style={validFeedback}>
