@@ -9,7 +9,7 @@ const validFeedback = {
   marginTop: '0.1rem',
 };
 
-const TextInputField = ({ name, placeholder, value, error, info, type, onChange, disabled }) => {
+const TextInputField = ({ name, placeholder, value, error, info, type, onChange, disabled, readonly }) => {
   return (
     <div className="form-group mb-4">
       <input
@@ -23,6 +23,7 @@ const TextInputField = ({ name, placeholder, value, error, info, type, onChange,
         value={value}
         onChange={onChange}
         disabled={disabled}
+        readonly={readonly}
       />
       {error && (
         <div className="valid-feedback" style={validFeedback}>
